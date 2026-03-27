@@ -1,50 +1,263 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<link rel="stylesheet" type="text/css" href="main.css" />
-<link rel="stylesheet" type="text/css" href="color.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas Barnes</title>
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 
-<title>thomas barnes</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #FFFFFF;
+      --ink: #1A1714;
+      --ink-light: #6B6459;
+      --accent: #8B3A2A;
+      --rule: #D6CFC4;
+    }
+
+    html {
+      background-color: var(--bg);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Layout ── */
+    main {
+      width: 100%;
+      max-width: 560px;
+      padding: 5rem 2rem 6rem;
+    }
+
+    /* ── Header ── */
+    header {
+      margin-bottom: 3.5rem;
+    }
+
+    .name {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(2.4rem, 7vw, 3.6rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+
+    .bio-line {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    /* ── Portrait ── */
+    .portrait-wrap {
+      margin-bottom: 3.5rem;
+    }
+
+    .portrait {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+    }
+
+    /* Placeholder shown when no real image is set */
+    .portrait-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background-color: #D9D2C7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portrait-placeholder span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1.1rem;
+      padding-top: 2.8rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── Publications ── */
+    .publications {
+      list-style: none;
+      margin-bottom: 0;
+    }
+
+    .publications li {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .publications li:first-child {
+      border-top: none;
+    }
+
+    .publications a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .publications a:hover {
+      color: var(--accent);
+    }
+
+    .pub-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+    }
+
+    .pub-venue {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--ink-light);
+      margin-left: 0.4rem;
+    }
+
+    .pub-forthcoming {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-left: 0.4rem;
+    }
+
+    /* ── Social links ── */
+    .social {
+      display: flex;
+      gap: 1.8rem;
+      padding-top: 2.8rem;
+      border-top: 1px solid var(--rule);
+      margin-top: 2.8rem;
+    }
+
+    .social a {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .social a:hover {
+      color: var(--accent);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 480px) {
+      main {
+        padding: 3.5rem 1.5rem 5rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<div class="list">
+  <main>
 
-<h1 class="name">thomas barnes</h1>
+    <header>
+      <h1 class="name">Thomas Barnes</h1>
+      <p class="bio-line">Thomas Barnes lives and works in Chicago.</p>
+    </header>
 
-<div class="bio">
-<div class="bioTitle">
-<h3>about</h3>
-</div>
+    <!-- Replace src with your actual portfolio image path, e.g. src="portrait.jpg" -->
+    <div class="portrait-wrap">
+      <div class="portrait-placeholder">
+        <span>Portfolio image</span>
+      </div>
+      <!-- Once you have your image, remove the div above and uncomment this:
+      <img class="portrait" src="portrait.jpg" alt="Thomas Barnes" />
+      -->
+    </div>
 
-Thomas Barnes lives and works in Chicago.
+    <p class="section-label">Fiction</p>
+    <ul class="publications">
+      <li>
+        <span class="pub-title">Color &amp; Chemical</span>
+        <span class="pub-forthcoming">Forthcoming Spring 2027</span>
+      </li>
+      <li>
+        <a href="https://newworldwriting.net/thomas-barnes-gravity-well/">
+          <span class="pub-title">Gravity Well</span>
+          <span class="pub-venue">New World Writing</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://floridareview.cah.ucf.edu/article/delivery/">
+          <span class="pub-title">Delivery</span>
+          <span class="pub-venue">Aquifer: The Florida Review Online</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://xraylitmag.com/blue-blooded-by-thomas-barnes/fiction/">
+          <span class="pub-title">Blue Blooded</span>
+          <span class="pub-venue">X-R-A-Y</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.cleavermagazine.com/gutshot-by-thomas-barnes/">
+          <span class="pub-title">Gutshot</span>
+          <span class="pub-venue">Cleaver Magazine</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://southwestreview.com/magazine/">
+          <span class="pub-title">The Skydiver</span>
+          <span class="pub-venue">Southwest Review, Vol. 101, Issue 2</span>
+        </a>
+      </li>
+    </ul>
 
-</div>
-<h3>fiction</h3>
+    <nav class="social">
+      <a href="https://twitter.com/thmsbrns" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://instagram.com/thms.brns" target="_blank" rel="noopener">Instagram</a>
+    </nav>
 
-<ul>
-<li>Color & Chemical [Forthcoming, Spring 2027]</a></li>
-<li><a href="https://newworldwriting.net/thomas-barnes-gravity-well/">Gravity Well [New World Writing]</a></li>
-<li><a href="https://floridareview.cah.ucf.edu/article/delivery/">Delivery [Aquifer: The Florida Review Online]</a></li>
-<li><a href="https://xraylitmag.com/blue-blooded-by-thomas-barnes/fiction/">Blue Blooded [X-R-A-Y]</a></li>
-<li><a href="https://www.cleavermagazine.com/gutshot-by-thomas-barnes/">Gutshot [Cleaver Magazine]</a></li>
-<li><a href="https://southwestreview.com/magazine/">The Skydiver [Southwest Review, Vol. 101, Issue 2]</a></li>
-
-</ul>
-
-</div>
-
-<div class="contact">
-<h3>contact</h3>
-<a href="https://twitter.com/thmsbrns" target="_blank"><i class="fab fa-twitter"></i></a>
-<a href="https://instagram.com/thms.brns" target="_blank"><i class="fab fa-instagram"></i></a>
-
-</div>
-
-
+  </main>
 </body>
 </html>
